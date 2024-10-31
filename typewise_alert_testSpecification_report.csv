@@ -1,0 +1,23 @@
+TestId,TestName,Input,Description,ExpectedOutput
+T1,InferBreach_NormalRange,"value=25.0, lowerLimit=0.0, upperLimit=35.0",Temperature within acceptable range.,NORMAL
+T2,InferBreach_TooLow,"value=-5.0, lowerLimit=0.0, upperLimit=35.0",Temperature below acceptable range.,TOO_LOW
+T3,InferBreach_TooHigh,"value=45.0, lowerLimit=0.0, upperLimit=35.0",Temperature above acceptable range.,TOO_HIGH
+T4,InferBreach_OnLowerBoundary,"value=0.0, lowerLimit=0.0, upperLimit=35.0",Temperature on lower boundary of range.,NORMAL
+T5,InferBreach_OnUpperBoundary,"value=35.0, lowerLimit=0.0, upperLimit=35.0",Temperature on upper boundary of range.,NORMAL
+T6,GetCoolingLimits_Passive,coolingType=PASSIVE_COOLING,Check limits for passive cooling.,"Limits{lowerLimit=0, upperLimit=35}"
+T7,GetCoolingLimits_HiActive,coolingType=HI_ACTIVE_COOLING,Check limits for high active cooling.,"Limits{lowerLimit=0, upperLimit=45}"
+T8,GetCoolingLimits_MedActive,coolingType=MED_ACTIVE_COOLING,Check limits for medium active cooling.,"Limits{lowerLimit=0, upperLimit=40}"
+T9,ClassifyBreach_Normal,"coolingType=PASSIVE_COOLING, temperatureInC=20.0",Classify normal temperature in passive cooling.,NORMAL
+T10,ClassifyBreach_TooHigh,"coolingType=HI_ACTIVE_COOLING, temperatureInC=50.0",Classify high temperature in high active cooling.,TOO_HIGH
+T11,ClassifyBreach_TooLow,"coolingType=MED_ACTIVE_COOLING, temperatureInC=-5.0",Classify low temperature in medium active cooling.,TOO_LOW
+T12,ClassifyBreach_OnUpperBoundary,"coolingType=PASSIVE_COOLING, temperatureInC=35.0",Classify temperature on upper boundary in passive cooling.,NORMAL
+T13,ClassifyBreach_OnLowerBoundary,"coolingType=HI_ACTIVE_COOLING, temperatureInC=0.0",Classify temperature on lower boundary in high active cooling.,NORMAL
+T14,CheckAndAlert_Controller_High,"alertTarget=TO_CONTROLLER, coolingType=PASSIVE_COOLING, temperatureInC=40.0",Check alert to controller for high temperature in passive cooling.,"""feed : 2"""
+T15,CheckAndAlert_Email_Low,"alertTarget=TO_EMAIL, coolingType=HI_ACTIVE_COOLING, temperatureInC=-10.0",Check alert to email for low temperature in high active cooling.,"""To: a.b@c.com\nHi, the temperature is too low\n"""
+T16,CheckAndAlert_Email_Normal,"alertTarget=TO_EMAIL, coolingType=MED_ACTIVE_COOLING, temperatureInC=20.0",Check no alert for normal temperature in medium active cooling.,(No output)
+T17,SendAlert_Controller_TooLow,"alertTarget=TO_CONTROLLER, breachType=TOO_LOW",Send alert to controller for low breach.,"""feed : 1"""
+T18,SendAlert_Email_TooHigh,"alertTarget=TO_EMAIL, breachType=TOO_HIGH",Send alert via email for high breach.,"""To: a.b@c.com\nHi, the temperature is too high\n"""
+T19,SendAlert_Email_Normal,"alertTarget=TO_EMAIL, breachType=NORMAL",No alert sent when breach is normal.,(No output)
+T20,SendToController_TooHigh,breachType=TOO_HIGH,Send high temperature alert to controller.,"""feed : 2"""
+T21,SendToEmail_TooLow,breachType=TOO_LOW,Send low temperature alert via email.,"""To: a.b@c.com\nHi, the temperature is too low\n"""
+T22,SendToEmail_Normal,breachType=NORMAL,No alert sent via email when temperature is normal.,(No output)
